@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html lang="null">
+<head prefix="og: http://ogp.me/ns#">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="null">
+    <title>Simple Linear regression | Ored&#39;s blog</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7684;&amp;#x4E00;&amp;#x822C;&amp;#x5F62;&amp;#x5F0F;&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x63A2;&amp;#x7A76;&amp;#x968F;&amp;#x673A;&amp;#x53D8;&amp;#x91CF; \( y \)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simple Linear regression">
+<meta property="og:url" content="https://batteryhp.github.io/2017/03/03/Linear-regression/index.html">
+<meta property="og:site_name" content="Ored's blog">
+<meta property="og:description" content="&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7684;&amp;#x4E00;&amp;#x822C;&amp;#x5F62;&amp;#x5F0F;&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x63A2;&amp;#x7A76;&amp;#x968F;&amp;#x673A;&amp;#x53D8;&amp;#x91CF; \( y \)">
+<meta property="og:updated_time" content="2017-03-22T09:07:11.655Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Simple Linear regression">
+<meta name="twitter:description" content="&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x7684;&amp;#x4E00;&amp;#x822C;&amp;#x5F62;&amp;#x5F0F;&amp;#x7B80;&amp;#x5355;&amp;#x7EBF;&amp;#x6027;&amp;#x56DE;&amp;#x5F52;&amp;#x662F;&amp;#x63A2;&amp;#x7A76;&amp;#x968F;&amp;#x673A;&amp;#x53D8;&amp;#x91CF; \( y \)">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:undefined",
+  "image": "undefined",
+  "name": "Ored He",
+  "url": "https://batteryhp.github.io"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Ored&#39;s blog</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">Ored He</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item" >
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Linear-regression" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    Simple Linear regression
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x7684;&#x4E00;&#x822C;&#x5F62;&#x5F0F;"><a href="#&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x7684;&#x4E00;&#x822C;&#x5F62;&#x5F0F;" class="headerlink" title="&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x7684;&#x4E00;&#x822C;&#x5F62;&#x5F0F;"></a>&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x7684;&#x4E00;&#x822C;&#x5F62;&#x5F0F;</h3><p>&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x662F;&#x63A2;&#x7A76;<strong>&#x968F;&#x673A;&#x53D8;&#x91CF;</strong> \( y \) &#x4E0E;<strong>&#x4E00;&#x822C;&#x53D8;&#x91CF;</strong> \( x_1,\cdots,x_p \)&#x4E4B;&#x95F4;&#x7684;&#x7EBF;&#x6027;&#x5173;&#x7CFB;&#x3002;&#x4E00;&#x822C;&#x5F62;&#x5F0F;&#x4E3A;<br>$$ \begin{equation}<br>   y = \beta_0 + \beta_1x_1 + \cdots + \beta_px_p + \epsilon<br>   \end{equation}  $$<br>&#x5176;&#x4E2D;&#xFF0C;\( \beta_0,\beta_1,\cdots,\beta_p \) &#x662F; \( p + 1 \) &#x4E2A;&#x53C2;&#x6570;&#xFF0C;\( x_1,\cdots,x_p \) &#x4E3A; \( p \) &#x4E2A;&#x81EA;&#x53D8;&#x91CF;&#xFF0C;\( y \) &#x662F;&#x56E0;&#x53D8;&#x91CF;&#xFF0C;\( \epsilon \) &#x662F;&#x8BEF;&#x5DEE;&#xFF0C;&#x5176;&#x4E2D;\( y \)&#x548C;\( \epsilon \)&#x662F;<strong>&#x968F;&#x673A;&#x53D8;&#x91CF;</strong>&#x3002;&#x901A;&#x5E38;&#x5047;&#x5B9A;&#x8BEF;&#x5DEE; \( \epsilon \) &#x6EE1;&#x8DB3;&#x4E0B;&#x9762;&#x7684;&#x6761;&#x4EF6;  </p>
+<p>$$<br>    \begin{equation}<br>         \begin{cases}<br>           {\mit{E}}[\epsilon] = 0 \\<br>        {\mit{Var}}[\epsilon] = \sigma^2<br>        \end{cases}<br>    \end{equation} $$  </p>
+<p><strong><em>&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x91CC;&#x7684;&#x7EBF;&#x6027;&#x662F;&#x6307; \( \beta_0,\beta_1,\cdots,\beta_p \) &#x662F;&#x7EBF;&#x6027;&#x7684;&#xFF0C;&#x5373;&#x4E0D;&#x4F1A;&#x5B58;&#x5728; \( \beta^2,\beta^3 \) &#x7B49;&#x5F62;&#x5F0F;&#xFF1B;&#x800C; \( x \) &#x53EF;&#x4EE5;&#x6709;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x5F62;&#x5F0F;,&#x4E0B;&#x9762;&#x4F1A;&#x6709;&#x8FD9;&#x65B9;&#x9762;&#x7684;&#x8BA8;&#x8BBA;&#x3002;</em></strong><br>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x6709; \( n \) &#x7EC4;&#x89C2;&#x5BDF;&#x503C;(\( x_{i1},\cdots,x_{ip};y_i\))(\( i = 1,\cdots,n\))&#xFF0C;&#x90A3;&#x4E48;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;  </p>
+<p>$$<br>    \begin{equation}<br>         \begin{cases}<br>           y_1 = \beta_0 + \beta_1x_{11} + \cdots + \beta_px_{1p} + \epsilon_1 \\<br>        y_2 = \beta_0 + \beta_1x_{21} + \cdots + \beta_px_{2p} + \epsilon_2 \\<br>        \cdots \\<br>        y_n = \beta_0 + \beta_1x_{n1} + \cdots + \beta_px_{np} + \epsilon_n<br>        \end{cases}<br>    \end{equation} $$  </p>
+<p>&#x5199;&#x6210;&#x77E9;&#x9635;&#x5F62;&#x5F0F;&#x4E3A;<br>$$<br>    \begin{equation}<br>        \boldsymbol{Y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}<br>    \end{equation} $$<br>&#x5176;&#x4E2D;&#xFF0C;\( \boldsymbol{Y} \)&#x4E0E;\( \boldsymbol{\epsilon} \)&#x4E3A;\( n \) &#x7EF4;&#x5411;&#x91CF;&#xFF1B;\( \boldsymbol{\beta} \)&#x4E3A;\( p+1 \)&#x7EF4;&#x5411;&#x91CF;&#xFF1B;\( \boldsymbol{Y} \) &#x4E3A;\( n \times (p+1)\)&#x9636;&#x77E9;&#x9635;&#xFF0C;&#x79F0;&#x4E3A;&#x56DE;&#x5F52;&#x8BBE;&#x8BA1;&#x77E9;&#x9635;&#x3002;<br>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x5730;&#x8FDB;&#x884C;&#x53C2;&#x6570;&#x4F30;&#x8BA1;&#xFF0C;&#x56DE;&#x5F52;&#x65B9;&#x7A0B;&#x6709;&#x5982;&#x4E0B;&#x5047;&#x5B9A;&#xFF1A;<br>(1)&#x89E3;&#x91CA;&#x53D8;&#x91CF;\(x_1,\cdots,x_p\)&#x662F;&#x786E;&#x5B9A;&#x6027;&#x53D8;&#x91CF;(&#x4E00;&#x822C;&#x53D8;&#x91CF;)&#xFF0C;&#x4E0D;&#x662F;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;&#x4E14;&#x8981;&#x6C42; \( {rank(\boldsymbol{X}})= p + 1 &lt; n \)<br>(2)&#x968F;&#x673A;&#x8BEF;&#x5DEE;&#x9879; \( \boldsymbol{\epsilon} \)&#x5177;&#x6709;&#x96F6;&#x65B9;&#x5DEE;&#x548C;&#x7B49;&#x65B9;&#x5DEE;&#xFF0C;&#x5373;  </p>
+<p>$$<br>    \begin{equation}<br>         \begin{cases}<br>           {\mit{E}}[\epsilon_i] = 0,i = 1,\cdots,n \\<br>        cov[\epsilon_i,\epsilon_j] =<br>            \begin{cases}<br>                \sigma^2,i=j,i,j=1,\cdots,n \\<br>                0,i \neq j,i = 1,\cdots,n<br>            \end{cases}<br>        \end{cases}<br>    \end{equation} $$  </p>
+<p>(3)&#x6B63;&#x6001;&#x5206;&#x5E03;&#x7684;&#x5047;&#x5B9A;&#x6761;&#x4EF6;&#x4E3A;  </p>
+<p>$$<br>    \begin{equation}<br>         \begin{cases}<br>           \epsilon_i \sim {\boldsymbol{N}}(0,\sigma^2),i=1,\cdots,n \\<br>        \epsilon_1,\cdots,\epsilon_n &#x76F8;&#x4E92;&#x72EC;&#x7ACB;<br>        \end{cases}<br>    \end{equation} $$<br>&#x4E5F;&#x5C31;&#x662F;<br>$$<br>    \begin{equation}<br>        {\boldsymbol{\epsilon}}\sim {\boldsymbol{N}}(\bf{0},\sigma^2 \boldsymbol{I}_n)<br>    \end{equation}  $$  </p>
+<p>&#x6709;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x5047;&#x8BBE;&#x4EE5;&#x540E;&#xFF0C;&#x770B;&#x4E00;&#x4E0B; \( \boldsymbol{Y}\) &#x7684;&#x6027;&#x8D28;&#x3002;&#x7531;&#x4E8E;\( \boldsymbol{X} \) &#x662F;&#x4E00;&#x822C;&#x53D8;&#x91CF;&#xFF0C;&#x53C2;&#x6570; \( \boldsymbol{\beta}\) &#x662F;&#x4E00;&#x822C;&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;\( \boldsymbol{Y}\)&#x7684;&#x968F;&#x673A;&#x6027;&#x8D28;&#x4E0E; \( \boldsymbol{\epsilon}\) &#x76F8;&#x4F3C;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;\( \boldsymbol{Y}\)&#x6EE1;&#x8DB3;<br>$$<br>    \begin{equation}<br>        {\boldsymbol{Y}}\sim {\boldsymbol{N}}(\boldsymbol{X}\boldsymbol{\beta},\sigma^2 \boldsymbol{I}_n)<br>    \end{equation}  $$ </p>
+<p><strong><em>&#x6CE8;&#x610F;&#xFF1A;&#x8FD9;&#x91CC;&#x5BF9;\( \boldsymbol{Y}\)&#x7684;&#x5047;&#x8BBE;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x5982;&#x679C;\( \boldsymbol{Y}\)&#x670D;&#x4ECE;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x5206;&#x5E03;&#xFF0C;&#x5219;&#x8FD9;&#x65F6;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x53D8;&#x6210;&#x4E86;&#x5E7F;&#x4E49;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#xFF0C;&#x9700;&#x8981;&#x8FDB;&#x4E00;&#x6B65;&#x5904;&#x7406;&#x624D;&#x80FD;&#x6C42;&#x89E3;&#x3002;</em></strong><br>&#x6211;&#x4EEC;&#x6C42;&#x89E3;&#x4E0A;&#x8FF0;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x60F3;&#x6C42;&#x51FA;&#x4E00;&#x7EC4;&#x7CFB;&#x6570;\( \boldsymbol{\beta}\)&#x4F7F;&#x5F97;&#x671F;&#x671B;&#x635F;&#x5931;&#x51FD;&#x6570;<br>$$<br>    \begin{equation}<br>        {\it{E}}({\it{L}}(\boldsymbol{Y},f(\boldsymbol{X})))<br>    \end{equation}  $$<br>&#x6700;&#x5C0F;&#x3002;&#x7528;&#x5E73;&#x65B9;&#x635F;&#x5931;&#x505A;&#x4F8B;&#x5B50;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B; \( f(\boldsymbol{X})\)&#x662F;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x5F62;&#x5F0F;&#x3002;<br>$$<br>    \begin{equation}<br>        {\it{E}}[(\boldsymbol{Y}-f(\boldsymbol{X}))^2]=<br>        E_{\boldsymbol{X}}(E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-f(\boldsymbol{X}))^2|\boldsymbol{X}])<br>    \end{equation}  $$   </p>
+<p>&#x6211;&#x4EEC;&#x628A;&#x4E0A;&#x5F0F;&#x4E2D;&#x5173;&#x4E8E; \(\boldsymbol{X}\) &#x6761;&#x4EF6;&#x671F;&#x671B;&#x7684;&#x90E8;&#x5206;&#x62FF;&#x51FA;&#x6765;&#xFF0C;&#x5E76;&#x4E14;&#x52A0;&#x5165;&#x63D2;&#x9879; \( E(\boldsymbol{Y}|\boldsymbol{X}) \)&#xFF0C;&#x5F97;&#x5230;<br>$$<br>    \begin{equation}<br>    \begin{split}<br>        E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-f(\boldsymbol{X}))^2|\boldsymbol{X}] &amp; = E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-E(\boldsymbol{Y}|\boldsymbol{X}) + E(\boldsymbol{Y}|\boldsymbol{X})-f(\boldsymbol{X}))^2|\boldsymbol{X}]\\<br>        &amp; = E_{\boldsymbol{Y}|\boldsymbol{X}}[(E(\boldsymbol{Y}|\boldsymbol{X})-f(\boldsymbol{X})))^2] + E_{\boldsymbol{Y}|\boldsymbol{X}}[2(\boldsymbol{Y}-E(\boldsymbol{Y}|\boldsymbol{X}))(E(\boldsymbol{Y}|\boldsymbol{X})-f(\boldsymbol{X}))] \\<br>        &amp; + E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-E(\boldsymbol{Y}|\boldsymbol{X}))^2]<br>    \end{split}<br>    \end{equation}  $$<br>&#x89C2;&#x5BDF;&#x4E00;&#x4E0B;&#x4E0A;&#x9762;&#x7684;&#x7B49;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x5230;&#x7B2C;&#x4E09;&#x9879; \( E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-E(\boldsymbol{Y}|\boldsymbol{X}))^2] \) &#x4E0E; \( f(\boldsymbol{X}) \)&#x65E0;&#x5173;&#xFF0C;&#x6545;&#x5728;&#x6C42;&#x671F;&#x671B;&#x635F;&#x5931;&#x51FD;&#x6570;&#x6781;&#x503C;&#x662F;&#x6B64;&#x9879;&#x53EF;&#x5FFD;&#x7565;&#xFF1B;&#x800C;&#x7B2C;&#x4E8C;&#x9879;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4E58;&#x5B50;</p>
+<p>$$<br>    \begin{equation}<br>        E_{\boldsymbol{Y}|\boldsymbol{X}}[(\boldsymbol{Y}-E(\boldsymbol{Y}|\boldsymbol{X}))]=E(\boldsymbol{Y}|\boldsymbol{X}) - E(\boldsymbol{Y}|\boldsymbol{X}) = 0<br>    \end{equation}  $$</p>
+<p>&#x6545;&#x7B2C;&#x4E8C;&#x9879;&#x4E3A;0.&#x56E0;&#x6B64;&#xFF0C;&#x7B2C;&#x4E00;&#x9879;&#x6700;&#x5C0F;&#x65F6;&#xFF0C;&#x671F;&#x671B;&#x635F;&#x5931;&#x51FD;&#x6570;&#x6700;&#x5C0F;&#xFF0C;&#x6700;&#x5C0F;&#x503C;&#x51FD;&#x6570;&#x6EE1;&#x8DB3;<br>$$<br>    \begin{equation}<br>        f^*(\boldsymbol{X}) = \mathop{\arg \min_{f}}E(\boldsymbol{Y},f(\boldsymbol{X}))^2=E(\boldsymbol{Y}|\boldsymbol{X})<br>    \end{equation}  $$   </p>
+<p>&#x5C06;&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x8BBA;&#x5E94;&#x7528;&#x5230;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x4E2D;&#xFF0C;&#x5F97;&#x5230;</p>
+<p>$$<br>    \begin{equation}<br>        f^*({\boldsymbol{X}}) = E({\boldsymbol{Y}}|{\boldsymbol{X}})=\boldsymbol{X}\boldsymbol{\beta}<br>    \end{equation}  $$</p>
+<p>&#x79F0;&#x4E0A;&#x5F0F;&#x4E3A;<strong>&#x56DE;&#x5F52;&#x65B9;&#x7A0B;</strong>&#x3002;&#x6211;&#x4EEC;&#x8BA9;&#x671F;&#x671B;&#x635F;&#x5931;&#x6700;&#x5C0F;&#x662F;&#x8BF4;&#x5BF9;&#x4E8E;&#x4E00;&#x7FA4;&#x70B9; \( ({\boldsymbol{X}},{\boldsymbol{Y}})\)&#x800C;&#x8A00;&#xFF0C;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x8D85;&#x5E73;&#x9762;&#x4F7F;&#x5F97;&#x6240;&#x6709;&#x70B9;&#x8DDD;&#x79BB;&#x8FD9;&#x4E2A;&#x8D85;&#x5E73;&#x9762;&#x7684;&#x8DDD;&#x79BB;&#x4E4B;&#x548C;&#x6700;&#x5C0F;&#x3002;&#x56DE;&#x5F52;&#x65B9;&#x7A0B;&#x544A;&#x8BC9;&#x6211;&#x4EEC;&#x8FD9;&#x6837;&#x7684;&#x8D85;&#x5E73;&#x9762;&#x5982;&#x4F55;&#x53BB;&#x627E;&#xFF1A;&#x5728;&#x7ED9;&#x5B9A;&#x4E0A;&#x9762;&#x6837;&#x672C;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5728;&#x6837;&#x672C;&#x5206;&#x5E03;&#x56FE;&#x4E2D;&#xFF0C;&#x53BB;&#x627E;&#x201D;&#x4E2D;&#x95F4;&#x201D;&#x90A3;&#x4E2A;&#x8D85;&#x5E73;&#x9762;&#x5C31;&#x884C;&#x4E86;&#x3002;&#x5411;&#x5176;&#x4ED6;&#x65B9;&#x5411;&#x8D70;&#x4E00;&#x4E0B;&#xFF0C;&#x635F;&#x5931;&#x4F1A;&#x53D8;&#x5927;&#xFF0C;&#x6211;&#x60F3;&#x8FD9;&#x53EF;&#x80FD;&#x5C31;&#x662F;&#x201D;&#x56DE;&#x5F52;&#x201D;&#x7684;&#x542B;&#x4E49;&#x5427;&#x3002;<br>&#x6211;&#x4EEC;&#x60F3;&#x627E;&#x7684;&#x8D85;&#x5E73;&#x9762;&#x7531;&#x53C2;&#x6570;\( \boldsymbol{\beta} \)&#x51B3;&#x5B9A;&#xFF0C;&#x4E0B;&#x9762;&#x7528;&#x5E73;&#x65B9;&#x635F;&#x5931;&#xFF0C;&#x6267;&#x884C;&#x6700;&#x5C0F;&#x5316;&#x671F;&#x671B;&#x635F;&#x5931;&#x7684;&#x8FC7;&#x7A0B;&#x6C42;&#x89E3;\( \boldsymbol{\beta} \)&#xFF0C;&#x8BB0;<strong>&#x7ECF;&#x9A8C;&#x635F;&#x5931;</strong>&#x4E3A;\( \it{RSS}(\boldsymbol{\beta})/N\)&#xFF0C;&#x5176;&#x4E2D;</p>
+<p>$$<br>    \begin{equation}<br>        \it{RSS(\boldsymbol{\beta})} = (\boldsymbol{y}-\boldsymbol{X}\boldsymbol{\beta})^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{\beta})<br>    \end{equation}$$</p>
+<p><strong><em>&#x6CE8;&#x610F;&#xFF1A;&#x771F;&#x5B9E;&#x7684;&#x671F;&#x671B;&#x5F62;&#x5F0F;&#x53EA;&#x6709;&#x4E0A;&#x5E1D;&#x77E5;&#x9053;&#xFF0C;&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x800C;&#x8A00;&#x628A;&#x671F;&#x671B;&#x89C6;&#x4E3A;&#x7ECF;&#x9A8C;&#x671F;&#x671B;&#xFF0C;&#x5373;&#x5199;&#x6210; \( 1/N\) &#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x53EF;&#x4EE5;&#x8BC1;&#x660E;&#x771F;&#x5B9E;&#x671F;&#x671B;&#x548C;&#x7ECF;&#x9A8C;&#x671F;&#x671B;&#x7684;&#x8BEF;&#x5DEE;&#x4E0D;&#x8D85;&#x8FC7; \( O(1/{\sqrt{(N)}}\))</em></strong>  </p>
+<p>&#x5C06;&#x4E0A;&#x5F0F;&#x6C42;&#x5BFC;&#x5E76;&#x4EE4;&#x5176;&#x4E3A;0&#x5F97;&#x5230;<br>$$<br>    \begin{equation}<br>        \frac{\partial}{\partial\boldsymbol{\beta}}{\it{RSS(\boldsymbol{\beta})}}=-2\boldsymbol{X}^T(\boldsymbol{y}-\boldsymbol{X}\boldsymbol{\beta})=0<br>    \end{equation}$$  </p>
+<p>&#x6C42;&#x89E3;&#x4E0A;&#x9762;&#x7684;&#x7B49;&#x5F0F;&#xFF0C;&#x5F97;&#x5230;\( \boldsymbol{\beta} \) &#x7684;&#x4F30;&#x8BA1;&#x503C;&#x4E3A;</p>
+<p>$$<br>    \begin{equation}<br>        \hat{\boldsymbol{\beta}}= ({\boldsymbol{X}}^T{\boldsymbol{X}})^{-1}{\boldsymbol{X}}^T{\boldsymbol{y}}<br>    \end{equation}  $$  </p>
+<p>&#x8FDB;&#x4E00;&#x6B65;&#x5730;&#xFF0C;&#x5F97;&#x5230;\( \boldsymbol{y}\) &#x7684;&#x4F30;&#x8BA1;&#x503C;<br>$$<br>    \begin{equation}<br>        \hat{\boldsymbol{y}}=\boldsymbol{X}{\hat{\boldsymbol{\beta}}}=\boldsymbol{X}({\boldsymbol{X}}^T{\boldsymbol{X}})^{-1}{\boldsymbol{X}}^T{\boldsymbol{y}}<br>    \end{equation}  $$ </p>
+<p>&#x5176;&#x4E2D;&#xFF0C;\( \boldsymbol{X}({\boldsymbol{X}}^T{\boldsymbol{X}})^{-1}{\boldsymbol{X}}^T \triangleq \boldsymbol{H} \)&#x79F0;&#x4E3A;<strong>&#x5E3D;&#x5B50;&#x77E9;&#x9635;</strong>&#x3002;&#x5E3D;&#x5B50;&#x77E9;&#x9635;&#x6709;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x6027;&#x8D28;&#xFF0C;&#x6BD4;&#x5982;&#x5BF9;&#x79F0;&#x3001;&#x5E42;&#x7B49;&#x3002;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x4E0B;&#x4E0A;&#x9762;&#x7684;&#x5F0F;&#x5B50;&#xFF0C;&#x5B83;&#x7684;&#x610F;&#x4E49;&#x662F;\( \hat{\boldsymbol{y}} \) &#x662F; \( \boldsymbol{y} \)&#x5728;&#x5E3D;&#x5B50;&#x77E9;&#x9635;&#x4E0B;&#x7684;&#x6295;&#x5F71;&#xFF0C;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x4F30;&#x8BA1;&#x503C;\( \hat{\boldsymbol{y}} \)&#x53EF;&#x4EE5;&#x7528;\( \boldsymbol{X}\)&#x751F;&#x6210;&#x7684;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x5411;&#x91CF;&#x8868;&#x793A;&#x3002;&#x65E2;&#x7136;&#x662F;&#x6295;&#x5F71;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x6709; \( \boldsymbol{e} = \boldsymbol{y} - \hat{\boldsymbol{y}}=(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{y} \)&#x4E3A;&#x8BEF;&#x5DEE;&#x5411;&#x91CF;&#xFF0C;&#x8FD9;&#x4E2A;&#x5411;&#x91CF;&#x4E5F;&#x6709;&#x4E00;&#x4E9B;&#x6027;&#x8D28;&#x53EF;&#x4EE5;&#x7814;&#x7A76;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x6CA1;&#x7EC6;&#x770B;&#x8FC7;&#x5C31;&#x4E0D;&#x5199;&#x4E86;&#x3002;</p>
+<h3 id="sklearn&#x4EE3;&#x7801;"><a href="#sklearn&#x4EE3;&#x7801;" class="headerlink" title="sklearn&#x4EE3;&#x7801;"></a>sklearn&#x4EE3;&#x7801;</h3><p>&#x4E0B;&#x9762;&#x770B;&#x4E00;&#x4E0B;sklearn&#x662F;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x56DE;&#x5F52;&#x7684;&#x3002;<br>&#x94FE;&#x63A5;&#x4E3A;<a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression" title="sklearn.linear_model.LinearRegression" target="_blank" rel="external">sklearn.linear_model.LinearRegression</a>&#x3002;<br>&#x4EE3;&#x7801;&#x7684;&#x6838;&#x5FC3;&#x89E3;&#x6CD5;&#x6765;&#x81EA; <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.lstsq.html" target="_blank" rel="external">scipy.linalg.lstsq</a> &#xFF0C;&#x5373;<code>scipy</code>&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x4E8C;&#x4E58;&#x89E3;&#x6CD5;&#xFF0C;&#x65B9;&#x6CD5;&#x89E3;&#x91CA;&#x5728; <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html#solving-linear-least-squares-problems-and-pseudo-inverses" target="_blank" rel="external">Solving linear least-squares problems and pseudo-inverses</a> &#x4E0E;&#x6211;&#x4EEC;&#x4E0A;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x76F8;&#x540C;&#x3002;&#x770B;&#x4E00;&#x4E0B;<code>scipy.linalg.lstsq</code>&#x4E2D;&#x53C2;&#x6570;<code>lapack_driver</code>&#x5173;&#x4E8E;&#x6700;&#x5C0F;&#x4E8C;&#x4E58;&#x7684;&#x89E3;&#x6CD5;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<pre><code>Which LAPACK driver is used to solve the least-squares problem.  
+Options are ``&apos;gelsd&apos;``, ``&apos;gelsy&apos;``, ``&apos;gelss&apos;``. Default
+(``&apos;gelsd&apos;``) is a good choice.  However, ``&apos;gelsy&apos;`` can be slightly
+faster on many problems.  ``&apos;gelss&apos;`` was used historically.  It is
+generally slow but uses less memory.
+</code></pre><p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;<code>sklearn</code>&#x4E2D;&#x53EA;&#x7ED9;&#x51FA;&#x4E86;<code>X</code>&#x3001;<code>y</code>&#x4E24;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5373;&#x7528;&#x7684;&#x662F;<code>gelsd</code>&#x65B9;&#x6CD5;&#x6C42;&#x89E3;&#x3002;&#x8FDB;&#x4E00;&#x6B65;&#x5730;&#xFF0C;<code>scipy</code>&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x4E8C;&#x4E58;&#x6CD5;&#x76F4;&#x63A5;&#x8C03;&#x7528;&#x7684;&#x662F;<a href="http://www.netlib.org/lapack/" target="_blank" rel="external">LAPACK</a>&#x5E93;&#xFF0C;&#x7531;<a href="http://www.netlib.org/lapack/lug/node27.html" target="_blank" rel="external">Linear Least Squares (LLS) Problems</a>&#x77E5;&#xFF0C;<code>gelsd</code>&#x7528;&#x7684;&#x662F;<code>divide-and-conquer SVD</code>&#x65B9;&#x6CD5;&#x3002;&#x5206;&#x6CBB;SVD&#x5206;&#x89E3;&#x7B97;&#x6CD5;&#x8FD8;&#x4E0D;&#x662F;&#x5F88;&#x6E05;&#x695A;&#xFF0C;&#x95EE;&#x95EE;&#x8BA1;&#x7B97;&#x7684;&#x540C;&#x5B66;&#x518D;&#x5199;&#x3002;</p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2017-03-03T08:31:11.498Z" itemprop="datePublished">2017-03-03</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2017/03/03/在此处输入标题/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    nihap
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2017/03/03/hello-world/" class="ui tiny button">
+                    
+                    Ored&#39;s Machine Learning Elephant
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#简单线性回归的一般形式"><span>简单线性回归的一般形式</span></a></li><li><a href="#sklearn代码"><span>sklearn代码</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2017 <a href="/">Ored He</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
+                href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
