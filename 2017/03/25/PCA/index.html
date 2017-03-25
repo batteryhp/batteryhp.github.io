@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html lang="null">
+<head prefix="og: http://ogp.me/ns#">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="null">
+    <title>Principal Components Analysis | Ored&#39;s blog</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="PCA&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7684;PCA(&amp;#x4E3B;&amp;#x6210;&amp;#x5206;&amp;#x5206;&amp;#x6790;)&amp;#x662F;&amp;#x901A;&amp;#x8FC7;&amp;#x53D8;&amp;#x91CF;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765;&amp;#x63CF;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Principal Components Analysis">
+<meta property="og:url" content="https://batteryhp.github.io/2017/03/25/PCA/index.html">
+<meta property="og:site_name" content="Ored's blog">
+<meta property="og:description" content="PCA&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7684;PCA(&amp;#x4E3B;&amp;#x6210;&amp;#x5206;&amp;#x5206;&amp;#x6790;)&amp;#x662F;&amp;#x901A;&amp;#x8FC7;&amp;#x53D8;&amp;#x91CF;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765;&amp;#x63CF;">
+<meta property="og:updated_time" content="2017-03-25T14:07:37.252Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Principal Components Analysis">
+<meta name="twitter:description" content="PCA&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#x7684;PCA(&amp;#x4E3B;&amp;#x6210;&amp;#x5206;&amp;#x5206;&amp;#x6790;)&amp;#x662F;&amp;#x901A;&amp;#x8FC7;&amp;#x53D8;&amp;#x91CF;&amp;#x7684;&amp;#x7EBF;&amp;#x6027;&amp;#x7EC4;&amp;#x5408;&amp;#x6765;&amp;#x63CF;">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:undefined",
+  "image": "undefined",
+  "name": "Ored He",
+  "url": "https://batteryhp.github.io"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Ored&#39;s blog</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">Ored He</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item" >
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-PCA" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    Principal Components Analysis
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="PCA&#x662F;&#x7528;&#x6765;&#x505A;&#x4EC0;&#x4E48;&#x7684;"><a href="#PCA&#x662F;&#x7528;&#x6765;&#x505A;&#x4EC0;&#x4E48;&#x7684;" class="headerlink" title="PCA&#x662F;&#x7528;&#x6765;&#x505A;&#x4EC0;&#x4E48;&#x7684;"></a>PCA&#x662F;&#x7528;&#x6765;&#x505A;&#x4EC0;&#x4E48;&#x7684;</h3><p>PCA(&#x4E3B;&#x6210;&#x5206;&#x5206;&#x6790;)&#x662F;&#x901A;&#x8FC7;&#x53D8;&#x91CF;&#x7684;&#x7EBF;&#x6027;&#x7EC4;&#x5408;&#x6765;&#x63CF;&#x8FF0;&#x8FD9;&#x7EC4;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5DEE;-&#x534F;&#x65B9;&#x5DEE;&#x7ED3;&#x6784;&#x3002;PCA&#x7684;&#x4E3B;&#x8981;&#x76EE;&#x7684;&#x6709;&#x964D;&#x7EF4;&#x3001;&#x6570;&#x636E;&#x538B;&#x7F29;&#x3001;&#x7279;&#x5F81;&#x63D0;&#x53D6;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x53EF;&#x89C6;&#x5316;&#x3002;<br><strong>&#x6CE8;&#x610F;&#xFF1A;&#x6570;&#x636E;&#x505A;&#x5B8C;PCA&#x4E4B;&#x540E;&#x5F97;&#x5230;&#x7684;&#x6570;&#x636E;&#x5F62;&#x5F0F;&#x57FA;&#x672C;&#x4E0A;&#x4E0D;&#x4F1A;&#x518D;&#x4FDD;&#x7559;&#x539F;&#x59CB;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x4E5F;&#x4E0D;&#x662F;&#x539F;&#x6765;&#x53D8;&#x91CF;&#x7684;&#x7EBF;&#x6027;&#x7EC4;&#x5408;&#xFF0C;&#x800C;&#x662F;&#x539F;&#x59CB;&#x53D8;&#x91CF;&#x7684;&#x6295;&#x5F71;&#x3002;</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">PCA&#x5728;&#x5B9A;&#x4E49;&#x4E0A;&#x6709;&#x4E24;&#x79CD;&#x7406;&#x89E3;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x6570;&#x636E;&#x5728;&#x4F4E;&#x7EF4;&#x7A7A;&#x95F4;&#x4E0A;&#x7684;&#x6B63;&#x4EA4;&#x6295;&#x5F71;&#xFF0C;</div><div class="line">&#x53E6;&#x4E00;&#x79CD;&#x662F;&#x6700;&#x5C0F;&#x5316;&#x539F;&#x59CB;&#x6570;&#x636E;&#x70B9;&#x4E0E;&#x6295;&#x5F71;&#x6570;&#x636E;&#x4E4B;&#x95F4;&#x7684;&#x5747;&#x65B9;&#x8DDD;&#x79BB;&#x3002;</div></pre></td></tr></table></figure></p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x5B9A;&#x4E49;&#x5F15;&#x81EA;PRML chapter12.&#x5176;&#x5B9E;&#xFF0C;&#x4ECE;&#x53D9;&#x8FF0;&#x4E0A;&#x770B;&#xFF0C;&#x8FD9;&#x4E24;&#x79CD;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;&#x662F;&#x4E00;&#x4E2A;&#x610F;&#x601D;&#x2026;<br>&#x4E0B;&#x9762;&#x770B;&#x770B;&#x8FD9;&#x51E0;&#x4E2A;&#x76EE;&#x7684;&#xFF1A;</p>
+<ol class="ui list">
+<li>&#x6570;&#x636E;&#x964D;&#x7EF4;&#x3002;&#x539F;&#x59CB;&#x6570;&#x636E;&#x5982;&#x679C;&#x662F; \( p\) &#x7EF4;&#xFF0C;&#x73B0;&#x5728;&#x9009;&#x62E9; \( k \) &#x4E2A;&#x4E3B;&#x6210;&#x5206;&#xFF0C;&#x663E;&#x7136;&#x8FBE;&#x5230;&#x4E86;&#x964D;&#x7EF4;&#x7684;&#x76EE;&#x7684;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x538B;&#x7F29;&#x3002;&#x539F;&#x672C; \( p \) &#x7EF4;&#x89C2;&#x6D4B;&#x6570;&#x636E;&#xFF0C;&#x73B0;&#x5728;&#x53EA;&#x8981;&#x89C2;&#x5BDF; \( k \) &#x4E2A;&#x4E3B;&#x6210;&#x5206;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#x3002;</li>
+<li>&#x7279;&#x5F81;&#x63D0;&#x53D6;&#x3002;&#x5C06;&#x4E3B;&#x6210;&#x5206;&#x4F5C;&#x4E3A;&#x7279;&#x5F81;&#x8F93;&#x5165;&#x6A21;&#x578B;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x53EF;&#x89C6;&#x5316;&#x3002;&#x5F80;&#x5F80;&#x5728;&#x521A;&#x62FF;&#x5230;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x60F3;&#x753B;&#x4E2A;&#x56FE;&#x770B;&#x4E00;&#x4E0B;&#x6570;&#x636E;&#x7684;&#x5206;&#x5E03;&#x60C5;&#x51B5;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x53EF;&#x80FD;&#x6570;&#x636E;&#x7EF4;&#x6570;&#x8FC7;&#x9AD8;&#xFF0C;&#x5BFC;&#x81F4;&#x753B;&#x4E0D;&#x51FA;&#x6765;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x7528;PCA&#x964D;&#x5230;2&#x7EF4;&#x6216;&#x8005;3&#x7EF4;&#x753B;&#x56FE;&#x5C31;&#x597D;&#x4E86;&#xFF0C;&#x8FD9;&#x4E2A;&#x633A;&#x5B9E;&#x7528;&#x7684;&#x3002;  </li>
+</ol>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x65E2;&#x7136;&#x6700;&#x540E;&#x7684;&#x4E3B;&#x6210;&#x5206;&#x662F;&#x6B63;&#x4EA4;&#x6295;&#x5F71;&#xFF0C;&#x90A3;&#x4E48;PCA &#x8FD8;&#x6709;&#x4E00;&#x5C42;&#x610F;&#x601D;&#xFF1A;&#x5C06;&#x539F;&#x6765;&#x5F88;&#x53EF;&#x80FD;&#x7EBF;&#x6027;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#x53D8;&#x6210;&#x7EBF;&#x6027;&#x65E0;&#x5173;&#x7684;&#x6570;&#x636E;&#x3002;<br>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x53D9;&#x8FF0;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;PCA&#x66F4;&#x591A;&#x7684;&#x662F;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6700;&#x7EC8;&#x7684;&#x76EE;&#x7684;&#x3002;&#x5728;&#x56E0;&#x5B50;&#x5206;&#x6790;&#x3001;&#x805A;&#x7C7B;&#x7B49;&#x65B9;&#x6CD5;&#x4E0A;&#x90FD;&#x7528;&#x5F97;&#x5230;&#x3002;</p>
+<p>### </p>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2017-03-25T12:25:26.882Z" itemprop="datePublished">2017-03-25</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a class="ui tiny button disabled"><i class="angle left icon"></i>Previous</a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2017/03/03/Ridge-Regression-and-Lasso/" class="ui tiny button">
+                    
+                    Ridge Regression and Lasso
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#PCA是用来做什么的"><span>PCA是用来做什么的</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2017 <a href="/">Ored He</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
+                href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
